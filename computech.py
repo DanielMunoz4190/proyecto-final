@@ -54,11 +54,11 @@ def print_matriz(matriz, nombre_columnas):
 # valor: el valor que deseas buscar
 # return: el indice del valor en la tabla o -1 si no esta
 #              lista_vendedores, 1, mariana lopez
-#def buscar_elemento(matriz, columna, valor):
-#    if valor in matriz[columna]:
-#        return matriz[columna].index(valor)
-#    else:
-#        return -1
+def buscar_elemento(matriz, columna, valor):
+    if valor in matriz[columna]:
+        return matriz[columna].index(valor)
+    else:
+        return -1
 
 def existencia_Art(matriz, columna, posicion):
     return matriz[columna][posicion]
@@ -85,6 +85,8 @@ def menu():
     return int(input(">> "))
 
 def registrar_venta():
+    print("Registra venta")
+
     producto  = int(input("Ingrese el ID del producto: "))
     cantidad = int(input("¿Cuantos producos quiere?: "))
     existencia  = int(existencia_Art(lista_productos, 5, producto ))
@@ -96,8 +98,24 @@ def registrar_venta():
             confirmacion = int(input("Ingrese 1 si quiere realizar la compra, ingrese 2 si desea esperar: "))
             if confirmacion == 1:
                 precio = int(existencia_Art(lista_productos, 4, producto))
-                total = cantidad*precio
+                total = existencia*precio
                 print("Su total es de: $",+total)
+                while True:
+                    vendedor = input("Nombre del vendedor que atendió: ")
+                    vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
+                    if vendedorIdx != -1:
+                        lista_ventas[0].append(vendedorIdx)
+                        lista_ventas[1].append(producto)
+                        fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
+                        lista_ventas[2].append(fecha)
+                        lista_ventas[3].append(cantidad)
+                        lista_ventas[4].append(total)
+                        print("Venta registrada exitosamente")
+                        break
+                    else:
+                        print(f"El vendedor {vendedor} no está registrado en el sistema.")
+            else:
+                print("Que tenga una buena tarde, vuelva pronto.")
         else:
             llegada = existencia_Art(lista_productos, 6, producto)
             print("No hay en existencia, llegan nuevos el: " + llegada)
@@ -105,14 +123,22 @@ def registrar_venta():
         precio = int(existencia_Art(lista_productos, 4, producto))
         total = cantidad*precio
         print("Su total es de: $",+total)
-            
+        while True:
+            vendedor = input("Nombre del vendedor que atendió: ")
+            vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
+            if vendedorIdx != -1:
+                lista_ventas[0].append(vendedorIdx)
+                lista_ventas[1].append(producto)
+                fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
+                lista_ventas[2].append(fecha)
+                lista_ventas[3].append(cantidad)
+                lista_ventas[4].append(total)
+                print("Venta registrada exitosamente")
+                break
+            else:
+                print(f"El vendedor {vendedor} no está registrado en el sistema.")
     
-
-
-
-
-    print("Registra venta")
-
+  
 def registar_articulo():
     print("Registra artículo")
 
