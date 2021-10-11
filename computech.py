@@ -149,15 +149,24 @@ def registrar_venta():
 def registar_articulo():
     print("Registra artículo")
     articulo = int(input("ID del articulo que se va a registrar: "))
-    if articulo >= 0 and articulo <= 4:
+    maximo=len(lista_productos[0])-1
+    
+
+    if articulo >= 0 and articulo <= maximo:
         existencia  = int(existencia_Art(lista_productos, 5, articulo ))
         cantidad = int(input("Cantidad de articulos a registrar: "))
         cant_nueva = cantidad + existencia
         lista_productos[5][articulo] = str(cant_nueva)
         print("Inventario actualizado exitosamente")
     else:
-        print("Ese articulo no se encuentra en el sistema: ")
-
+        lista_productos[0].append(articulo)
+        lista_productos[1].append(input('Ingrese la marca del producto: '))
+        lista_productos[2].append(input('Ingrese la sub marca: '))
+        lista_productos[3].append(input('Ingrese el modelos: '))
+        lista_productos[4].append(input('Ingrese el precio por unidad: '))        
+        lista_productos[5].append((input("Cantidad de articulos a registrar: ")))
+        lista_productos[6].append('20/10/2021')
+        
 def consultar_inventario():
     print_matriz(lista_productos, productos.COLUMNAS)
     
