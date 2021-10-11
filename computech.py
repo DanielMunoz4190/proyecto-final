@@ -86,9 +86,9 @@ def menu():
 
 def registrar_venta():
     print("Registra venta")
-
+    
     producto  = int(input("Ingrese el ID del producto: "))
-    if producto >= 0 and producto <= 0:
+    if producto >= 0 and producto <= 4:
         cantidad = int(input("¿Cuantos producos quiere?: "))
         existencia  = int(existencia_Art(lista_productos, 5, producto ))
         if existencia < cantidad:
@@ -100,6 +100,7 @@ def registrar_venta():
                 if confirmacion == 1:
                     precio = int(existencia_Art(lista_productos, 4, producto))
                     total = existencia*precio
+                    lista_productos[5][producto]=str(existencia-existencia)
                     print("Su total es de: $",+total)
                     while True:
                         vendedor = input("Nombre del vendedor que atendió: ")
@@ -125,6 +126,8 @@ def registrar_venta():
             precio = int(existencia_Art(lista_productos, 4, producto))
             total = cantidad*precio
             print("Su total es de: $",+total)
+            lista_productos[5][producto]=str(existencia-cantidad)
+
             while True:
                 vendedor = input("Nombre del vendedor que atendió: ")
                 vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
@@ -156,12 +159,13 @@ def registar_articulo():
         print("Ese articulo no se encuentra en el sistema: ")
 
 def consultar_inventario():
+    print_matriz(lista_productos, productos.COLUMNAS)
     
 
     print("Consulta inventario")
 
 def consultar_ventas():
-    
+    print_matriz(lista_ventas, ventas.COLUMNAS)
     print("Consulta venta")
 
 def reporte_ventas_vendedor():
