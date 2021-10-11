@@ -87,9 +87,18 @@ def menu():
 def registrar_venta():
     print("Registra venta")
     
-    producto  = int(input("Ingrese el ID del producto: "))
-    if producto >= 0 and producto <= 4:
-        cantidad = int(input("¿Cuantos producos quiere?: "))
+    nproducto  = (input("Ingrese el nombre del producto: ")).lower()
+    producto = buscar_elemento(lista_productos, productos.SUB_MARCA, nproducto)
+    while True:        
+        vendedor = (input("Nombre del vendedor que atendió: ")).lower()             
+        vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
+        if vendedorIdx != -1:
+            break
+        else:
+            print(f"El vendedor {vendedor} no está registrado en el sistema.")
+    maximo=(len(lista_productos[0]))-1
+    if producto >= 0 and producto <= maximo:
+        cantidad = int(input("¿Cuantos productos quiere?: "))
         existencia  = int(existencia_Art(lista_productos, 5, producto ))
         if existencia < cantidad:
             if existencia > 0:
@@ -101,22 +110,17 @@ def registrar_venta():
                     precio = int(existencia_Art(lista_productos, 4, producto))
                     total = existencia*precio
                     lista_productos[5][producto]=str(existencia-existencia)
-                    print("Su total es de: $",+total)
-                    while True:
-                        vendedor = input("Nombre del vendedor que atendió: ")
-                        vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
-                        if vendedorIdx != -1:
-                            vendedorIdx += 1
-                            lista_ventas[0].append(vendedorIdx)
-                            lista_ventas[1].append(producto)
-                            fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
-                            lista_ventas[2].append(fecha)
-                            lista_ventas[3].append(existencia)
-                            lista_ventas[4].append(total)
-                            print("Venta registrada exitosamente")
-                            break
-                        else:
-                            print(f"El vendedor {vendedor} no está registrado en el sistema.")
+                    print("Su total es de: $",+total)                                          
+                    if vendedorIdx != -1:
+                        vendedorIdx += 1
+                        lista_ventas[0].append(vendedorIdx)
+                        lista_ventas[1].append(producto)
+                        fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
+                        lista_ventas[2].append(fecha)
+                        lista_ventas[3].append(existencia)
+                        lista_ventas[4].append(total)
+                        print("Venta registrada exitosamente")                       
+                        
                 else:
                     print("Que tenga una buena tarde, vuelva pronto.")
             else:
@@ -149,8 +153,7 @@ def registrar_venta():
 def registar_articulo():
     print("Registra artículo")
     articulo = int(input("ID del articulo que se va a registrar: "))
-    maximo=len(lista_productos[0])-1
-    
+    maximo=len(lista_productos[0])-1   
 
     if articulo >= 0 and articulo <= maximo:
         existencia  = int(existencia_Art(lista_productos, 5, articulo ))
