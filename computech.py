@@ -104,11 +104,12 @@ def registrar_venta():
                     vendedor = input("Nombre del vendedor que atendió: ")
                     vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
                     if vendedorIdx != -1:
+                        vendedorIdx += 1
                         lista_ventas[0].append(vendedorIdx)
                         lista_ventas[1].append(producto)
                         fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
                         lista_ventas[2].append(fecha)
-                        lista_ventas[3].append(cantidad)
+                        lista_ventas[3].append(existencia)
                         lista_ventas[4].append(total)
                         print("Venta registrada exitosamente")
                         break
@@ -127,6 +128,7 @@ def registrar_venta():
             vendedor = input("Nombre del vendedor que atendió: ")
             vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
             if vendedorIdx != -1:
+                vendedorIdx += 1
                 lista_ventas[0].append(vendedorIdx)
                 lista_ventas[1].append(producto)
                 fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
@@ -146,6 +148,7 @@ def consultar_inventario():
     print("Consulta inventario")
 
 def consultar_ventas():
+    
     print("Consulta venta")
 
 def reporte_ventas_vendedor():
