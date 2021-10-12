@@ -4,13 +4,13 @@ import vendedores
 import ventas
 
 lista_productos = [
-    ["0", "1", "2", "3", "4"],                                          #Producto ID
-    ['hp', 'hp', 'asus', 'asus', 'apple'],                     #Marca
-    ['victus', 'probook', 'zenbookpro', 'zephyrus', 'macbookair'],                   #Sub Marca
-    ["2021", "2021", "2021", "2021", "2020"],                           #Modelo
-    ["30999", "22600", "36999", "33399", "24000"],                      #Precio
-    ["2", "1", "0", "3", "2"],                                          #Existencia
-    ["20/10/2021","20/10/2021","20/10/2021","20/10/2021", "20/10/2021"] #Fecha resurtido
+    ["0", "1", "2", "3", "4","5","6","7","8","9"],                                          #Producto ID
+    ['hp', 'hp', 'asus', 'asus', 'apple',"hp","hp","apple","apple","asus"],                     #Marca
+    ['victus', 'probook', 'zenbookpro', 'zephyrus', 'macbookair','envy','spectre',"macbookpro",'macbookmini','rog'],      #Sub Marca
+    ["2021", "2021", "2021", "2021", "2020",'2020','2021','2021','2021','2020'],                           #Modelo
+    ["30999", "22600", "36999", "33399", "24000",'19999','26999','38999','23999','26999'],                      #Precio
+    ["2", "1", "0", "3", "2",'8','5','2','3','1'],                                          #Existencia
+    ["20/10/2021","20/10/2021","20/10/2021","20/10/2021", "20/10/2021","20/10/2021","20/10/2021","20/10/2021","20/10/2021", "20/10/2021"] #Fecha resurtido
 ]
 
 lista_vendedores = [
@@ -153,8 +153,7 @@ def registrar_venta():
 def registar_articulo():
     print("Registra artículo")
     articulo = int(input("ID del articulo que se va a registrar: "))
-    maximo=len(lista_productos[0])-1   
-
+    maximo=len(lista_productos[0])-1 
     if articulo >= 0 and articulo <= maximo:
         existencia  = int(existencia_Art(lista_productos, 5, articulo ))
         cantidad = int(input("Cantidad de articulos a registrar: "))
