@@ -2,16 +2,9 @@
 import productos
 import vendedores
 import ventas
+from pathlib import Path
 
-lista_productos = [
-    ["0", "1", "2", "3", "4"],                                          #Producto ID
-    ['hp', 'hp', 'asus', 'asus', 'apple'],                     #Marca
-    ['victus', 'probook', 'zenbookpro', 'zephyrus', 'macbookair'],                   #Sub Marca
-    ["2021", "2021", "2021", "2021", "2020"],                           #Modelo
-    ["30999", "22600", "36999", "33399", "24000"],                      #Precio
-    ["2", "1", "0", "3", "2"],                                          #Existencia
-    ["20/10/2021","20/10/2021","20/10/2021","20/10/2021", "20/10/2021"] #Fecha resurtido
-]
+lista_productos = [ ]
 
 lista_vendedores = [
     ["1", "2", "3"],                                   #Vendedor ID
@@ -71,6 +64,31 @@ def obtener_id(matriz, indice):
         return matriz[0][indice]
     else:
         return -1
+# Abrir el archivo de productos, leer su informacion y carga la informacion en lista_productos
+def cargarProductos():
+    ruta_productos = Path('archivos', 'productos.csv')
+    archivo_productos = open(ruta_productos)
+    content_productos = archivo_productos.readlines()
+    for line in content_productos:
+        lista_productos.append(line.strip().split(','))
+    archivo_productos.close()
+    
+    
+#Abrir el archivo de producto y guarda en el la informacion que hay en lista_productos
+def guardarProductos():
+    string_content = ""
+    for lines in lista_productos:
+        for idx, element in enumerate(lines):
+            if idx == len(lines) - 1:
+                string_content += element + "\n"
+            else:
+                string_content += element + ","
+
+    string_content = string_content.strip()
+    ruta_productos = Path('archivos', 'productos.csv')
+    archivo_productos = open(ruta_productos, "w")
+    archivo_productos.write(string_content)
+    archivo_productos.close()
 
 def menu():
     print()
@@ -152,9 +170,8 @@ def registrar_venta():
   
 def registar_articulo():
     print("Registra artículo")
-    nproducto  = (input("Ingrese el nombre del producto: ")).lower()
-    articulo = buscar_elemento(lista_productos, productos.SUB_MARCA, nproducto)
-    maximo=len(lista_productos[0])-1   
+    articulo = int(input("ID del articulo que se va a registrar: "))
+    maximo=len(lista_productos[0])-1 
     if articulo >= 0 and articulo <= maximo:
         existencia  = int(existencia_Art(lista_productos, 5, articulo ))
         cantidad = int(input("Cantidad de articulos a registrar: "))
@@ -202,10 +219,11 @@ def main():
     print("-" * 30)
     print("| Bienvenido a CompuTech |")
     print("-" * 30)
-
+    cargarProductos()
     while True:
         selected = menu()
         if selected == 0:
+            guardarProductos()
             print("Gracias por su visita")
             break
         elif selected == 1:
