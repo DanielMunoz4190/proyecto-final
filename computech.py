@@ -4,15 +4,7 @@ import vendedores
 import ventas
 from pathlib import Path
 
-lista_productos = [
-    ["0", "1", "2", "3", "4","5","6","7","8","9"],                                          #Producto ID
-    ['hp', 'hp', 'asus', 'asus', 'apple',"hp","hp","apple","apple","asus"],                     #Marca
-    ['victus', 'probook', 'zenbookpro', 'zephyrus', 'macbookair','envy','spectre',"macbookpro",'macbookmini','rog'],      #Sub Marca
-    ["2021", "2021", "2021", "2021", "2020",'2020','2021','2021','2021','2020'],                           #Modelo
-    ["30999", "22600", "36999", "33399", "24000",'19999','26999','38999','23999','26999'],                      #Precio
-    ["2", "1", "0", "3", "2",'8','5','2','3','1'],                                          #Existencia
-    ["20/10/2021","20/10/2021","20/10/2021","20/10/2021", "20/10/2021","20/10/2021","20/10/2021","20/10/2021","20/10/2021", "20/10/2021"] #Fecha resurtido
-]
+lista_productos = [ ]
 
 lista_vendedores = [
     ["1", "2", "3"],                                   #Vendedor ID
@@ -80,7 +72,8 @@ def cargarProductos():
     for line in content_productos:
         lista_productos.append(line.strip().split(','))
     archivo_productos.close()
-
+    
+    
 #Abrir el archivo de producto y guarda en el la informacion que hay en lista_productos
 def guardarProductos():
     string_content = ""
@@ -215,10 +208,11 @@ def main():
     print("-" * 30)
     print("| Bienvenido a CompuTech |")
     print("-" * 30)
-
+    cargarProductos()
     while True:
         selected = menu()
         if selected == 0:
+            guardarProductos()
             print("Gracias por su visita")
             break
         elif selected == 1:
