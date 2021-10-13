@@ -170,7 +170,8 @@ def registrar_venta():
   
 def registar_articulo():
     print("Registra artículo")
-    articulo = int(input("ID del articulo que se va a registrar: "))
+    nproducto  = (input("Ingrese el nombre del producto: ")).lower()
+    articulo = buscar_elemento(lista_productos, productos.SUB_MARCA, nproducto)
     maximo=len(lista_productos[0])-1 
     if articulo >= 0 and articulo <= maximo:
         existencia  = int(existencia_Art(lista_productos, 5, articulo ))
