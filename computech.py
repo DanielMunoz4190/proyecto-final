@@ -2,6 +2,7 @@
 import productos
 import vendedores
 import ventas
+from pathlib import Path
 
 lista_productos = [
     ["0", "1", "2", "3", "4","5","6","7","8","9"],                                          #Producto ID
@@ -71,6 +72,30 @@ def obtener_id(matriz, indice):
         return matriz[0][indice]
     else:
         return -1
+# Abrir el archivo de productos, leer su informacion y carga la informacion en lista_productos
+def cargarProductos():
+    ruta_productos = Path('archivos', 'productos.csv')
+    archivo_productos = open(ruta_productos)
+    content_productos = archivo_productos.readlines()
+    for line in content_productos:
+        lista_productos.append(line.strip().split(','))
+    archivo_productos.close()
+
+#Abrir el archivo de producto y guarda en el la informacion que hay en lista_productos
+def guardarProductos():
+    string_content = ""
+    for lines in lista_productos:
+        for idx, element in enumerate(lines):
+            if idx == len(lines) - 1:
+                string_content += element + "\n"
+            else:
+                string_content += element + ","
+
+    string_content = string_content.strip()
+    ruta_productos = Path('archivos', 'productos.csv')
+    archivo_productos = open(ruta_productos, "w")
+    archivo_productos.write(string_content)
+    archivo_productos.close()
 
 def menu():
     print()
