@@ -67,6 +67,14 @@ def cargarProductos():
         lista_productos.append(line.strip().split(','))
     archivo_productos.close()
     
+def cargarventas():
+    ruta_ventas = Path('archivos', 'ventas.csv')
+    archivo_ventas = open(ruta_ventas)
+    content_ventas = archivo_ventas.readlines()
+    for line in content_ventas:
+        lista_ventas.append(line.strip().split(','))
+    archivo_ventas.close()
+    
     
 #Abrir el archivo de producto y guarda en el la informacion que hay en lista_productos
 def guardarProductos():
@@ -237,6 +245,8 @@ def main():
     print("| Bienvenido a CompuTech |")
     print("-" * 30)
     cargarProductos()
+    cargarventas()
+    print(lista_ventas)
     while True:
         selected = menu()
         if selected == 0:
