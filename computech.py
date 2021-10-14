@@ -224,8 +224,12 @@ def reporte_ventas_vendedor():
         if vendedor_id== id:
             rventas.append(idx)
     reporte_ventas=[[],[],[],[],[]]
-    for lista in rventas:
-        prdocto_id=lista_ventas[]
+    
+    
+    #for lista in rventas:
+        
+        #prdocto_id=lista_ventas[]
+
 
 
 
