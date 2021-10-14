@@ -11,13 +11,7 @@ lista_vendedores = [
     ['juan perez', 'mariana lopez', 'pedro gonzalez','alejadro martinez', 'daniel alejandro', 'miguel alvarez','jose hernandez', 'juan serrano', 'josue rodriguez','pedro sanchez']  #Nombre
 ]
 
-lista_ventas = [
-    [],                                  #Vendedor ID
-    [],                                  #Producto ID
-    [], #Fecha
-    [],                                  #Cantidad
-    []                  #Total
-]
+lista_ventas = []
 
 # print_matriz
 # matriz: la matriz que quieres desplegar en la terminal
