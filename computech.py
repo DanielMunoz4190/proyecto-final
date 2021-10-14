@@ -7,8 +7,8 @@ from pathlib import Path
 lista_productos = [ ]
 
 lista_vendedores = [
-    ["1", "2", "3"],                                   #Vendedor ID
-    ['juan perez', 'mariana lopez', 'pedro gonzalez']  #Nombre
+    ["1", "2", "3",'4','5','6','7','8','9','10'],                                   #Vendedor ID
+    ['juan perez', 'mariana lopez', 'pedro gonzalez','alejadro martinez', 'daniel alejandro', 'miguel alvarez','jose hernandez', 'juan serrano', 'josue rodriguez','pedro sanchez']  #Nombre
 ]
 
 lista_ventas = [
@@ -211,6 +211,24 @@ def consultar_ventas():
 
 def reporte_ventas_vendedor():
     print("Genera reporte")
+    vendedor=input('¿Cual es el nombre del vendedor').lower()
+    while True:
+        vendedor_idx=buscar_elemento(lista_vendedores,vendedores.NOMBRE,vendedor)
+        if vendedor_idx !=-1:
+            break
+        else:
+            print(f'El nombre {vendedor.tittle()} no esta registrado')
+    vendedor_id=buscar_elemento(lista_vendedores,vendedor_idx,vendedores.VENDEDOR_ID)
+    rventas=[]
+    for idx,id in enumerate (lista_ventas[ventas.VENDEDOR_ID]):
+        if vendedor_id== id:
+            rventas.append(idx)
+    reporte_ventas=[[],[],[],[],[]]
+    for lista in rventas:
+        prdocto_id=lista_ventas[]
+
+
+
 
 def reporte_ventas_articulo():
     print("Genera reporte")
