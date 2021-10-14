@@ -246,7 +246,7 @@ def main():
     print("-" * 30)
     cargarProductos()
     cargarventas()
-    print(lista_ventas)
+    
     while True:
         selected = menu()
         if selected == 0:
