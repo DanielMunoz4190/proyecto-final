@@ -284,7 +284,7 @@ def main():
     cargarProductos()
     cargarventas()
     cargarvendedores()
-    print(lista_ventas)
+    
     while True:
         selected = menu()
         if selected == 0:
