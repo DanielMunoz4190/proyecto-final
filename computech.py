@@ -70,6 +70,7 @@ def cargarventas():
     content_ventas = archivo_ventas.readlines()
     for line in content_ventas:
         lista_ventas.append(line.strip().split(','))
+    lista_ventas[0][0]='2'
     archivo_ventas.close()
     
 def cargarvendedores():
@@ -244,10 +245,36 @@ def reporte_ventas_vendedor():
         reporte_vendedor[3].append(cantidad)
         total=lista_ventas[ventas.TOTAL][i]
         reporte_vendedor[4].append(total)
-    print_matriz(reporte_vendedor,ventas.COLUMNAS)
+    print_matriz(reporte_vendedor,ventas.COLUMNAS1)
 
 def reporte_ventas_articulo():
     print("Genera reporte")
+    producto=input('¿Cual es el nombre del producto? ').lower()
+    while True:
+        producto_idx=buscar_elemento(lista_productos,productos.SUB_MARCA,producto)
+        if producto_idx !=-1:
+            break
+        else:
+            print(f'El producto {producto.title()} no esta registrado')
+    producto_id=lista_productos[0][producto_idx]
+    
+    ventas_producto=[]
+    for idx,id in enumerate (lista_ventas[ventas.PRODUCTO_ID]):
+        if producto_id== id:
+            ventas_producto.append(idx)
+    
+    reporte_vendedor=[[],[],[],[],[],[]]
+    for i in ventas_producto: 
+        id_vendedor=lista_ventas[ventas.VENDEDOR_ID][i]
+        reporte_vendedor[0].append(id_vendedor)        
+        reporte_vendedor[1].append(producto_id)
+        fecha_venta=lista_ventas[ventas.FECHA][i]
+        reporte_vendedor[2].append(fecha_venta)
+        cantidad=lista_ventas[ventas.CANTIDAD][i]
+        reporte_vendedor[3].append(cantidad)
+        total=lista_ventas[ventas.TOTAL][i]
+        reporte_vendedor[4].append(total)
+    print_matriz(reporte_vendedor,ventas.COLUMNAS)
 
 def main():
 
@@ -257,7 +284,7 @@ def main():
     cargarProductos()
     cargarventas()
     cargarvendedores()
-    
+    print(lista_ventas)
     while True:
         selected = menu()
         if selected == 0:
