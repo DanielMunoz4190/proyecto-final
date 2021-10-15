@@ -214,8 +214,32 @@ def consultar_inventario():
             print("Este articulo no se encuentra en el inventario.")
 
 def consultar_ventas():
-    print_matriz(lista_ventas, ventas.COLUMNAS)
     print("Consulta venta")
+    fecha_inicial=input('¿Cual es la primera fecha del rango?(dd/mm/aaaa)? ')
+    fecha_final=input('¿Cual es la segunda fecha del rango?(dd/mm/aaaa)')
+    f1=fecha_inicial.rsplit('/')
+    f2=fecha_final.rsplit('/')
+    rango1=datetime.datetime(int(f1[2]),int(f1[1]),int(f1[0]))
+    rango2=datetime.datetime(int(f2[2]),int(f2[1]),int(f2[0]))
+    reporte_ventas_fechas=[[],[],[],[],[],[]]
+    fechas=[]
+    for idx,i in enumerate (lista_ventas[2]):
+        fecha=i.rsplit('/')
+        iteracion=datetime.datetime(int(fecha[2]),int(fecha[1]),int(fecha[0]))
+        if iteracion<=rango2 and iteracion>=rango1:
+            fechas.append(idx)
+    for i in fechas:
+        fechav=lista_ventas[2][i]
+        reporte_ventas_fechas[0].append(fechav) 
+        id_vendedor=lista_ventas[0][i]
+        reporte_ventas_fechas[1].append(id_vendedor)
+        id_producto=lista_ventas[1][i]
+        reporte_ventas_fechas[2].append(id_producto)
+        cantidad=lista_ventas[ventas.CANTIDAD][i]
+        reporte_ventas_fechas[3].append(cantidad)
+        total=lista_ventas[ventas.TOTAL][i]
+        reporte_ventas_fechas[4].append(total)
+    print_matriz(reporte_ventas_fechas,ventas.COLUMNAS2)
 
 def reporte_ventas_vendedor():
     print("Genera reporte")
