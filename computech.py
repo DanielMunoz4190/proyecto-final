@@ -1,4 +1,4 @@
-#import datetime
+import datetime
 import productos
 import vendedores
 import ventas
@@ -6,10 +6,7 @@ from pathlib import Path
 
 lista_productos = [ ]
 
-lista_vendedores = [
-    ["1", "2", "3",'4','5','6','7','8','9','10'],                                   #Vendedor ID
-    ['juan perez', 'mariana lopez', 'pedro gonzalez','alejadro martinez', 'daniel alejandro', 'miguel alvarez','jose hernandez', 'juan serrano', 'josue rodriguez','pedro sanchez']  #Nombre
-]
+lista_vendedores = []
 
 lista_ventas = []
 
@@ -75,6 +72,14 @@ def cargarventas():
         lista_ventas.append(line.strip().split(','))
     archivo_ventas.close()
     
+def cargarvendedores():
+    ruta_vendedores = Path('archivos', 'vendedores.csv')
+    archivo_vendedores = open(ruta_vendedores)
+    content_vendedores = archivo_vendedores.readlines()
+    for line in content_vendedores:
+        lista_vendedores.append(line.strip().split(','))
+    archivo_vendedores.close()
+    
     
 #Abrir el archivo de producto y guarda en el la informacion que hay en lista_productos
 def guardarProductos():
@@ -136,7 +141,7 @@ def registrar_venta():
                         lista_ventas[0].append(vendedorIdx)
                         lista_ventas[1].append(producto)
                         fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
-                        lista_ventas[2].append(fecha)
+                        lista_ventas[2].append(datetime.datetime.now().strftime('%d/%m/Y'))
                         lista_ventas[3].append(existencia)
                         lista_ventas[4].append(total)
                         print("Venta registrada exitosamente")                       
@@ -213,28 +218,33 @@ def consultar_ventas():
 
 def reporte_ventas_vendedor():
     print("Genera reporte")
-    vendedor=input('¿Cual es el nombre del vendedor').lower()
+    vendedor=input('¿Cual es el nombre del vendedor? ').lower()
     while True:
         vendedor_idx=buscar_elemento(lista_vendedores,vendedores.NOMBRE,vendedor)
         if vendedor_idx !=-1:
             break
         else:
-            print(f'El nombre {vendedor.tittle()} no esta registrado')
-    vendedor_id=buscar_elemento(lista_vendedores,vendedor_idx,vendedores.VENDEDOR_ID)
-    rventas=[]
+            print(f'El nombre {vendedor.title()} no esta registrado')
+    vendedor_id=lista_vendedores[0][vendedor_idx]
+    
+    ventas_vendedor=[]
     for idx,id in enumerate (lista_ventas[ventas.VENDEDOR_ID]):
         if vendedor_id== id:
-            rventas.append(idx)
-    reporte_ventas=[[],[],[],[],[]]
+            ventas_vendedor.append(idx)
     
-    
-    #for lista in rventas:
-        
-        #prdocto_id=lista_ventas[]
-
-
-
-
+    reporte_vendedor=[[],[],[],[],[],[]]
+    for i in ventas_vendedor: 
+        producto_id=lista_ventas[ventas.PRODUCTO_ID][i]
+        reporte_vendedor[0].append(producto_id)
+        nombre_producto=lista_productos[productos.SUB_MARCA][int(producto_id)]
+        reporte_vendedor[1].append(nombre_producto)
+        fecha_venta=lista_ventas[ventas.FECHA][i]
+        reporte_vendedor[2].append(fecha_venta)
+        cantidad=lista_ventas[ventas.CANTIDAD][i]
+        reporte_vendedor[3].append(cantidad)
+        total=lista_ventas[ventas.TOTAL][i]
+        reporte_vendedor[4].append(total)
+    print_matriz(reporte_vendedor,ventas.COLUMNAS)
 
 def reporte_ventas_articulo():
     print("Genera reporte")
@@ -246,6 +256,7 @@ def main():
     print("-" * 30)
     cargarProductos()
     cargarventas()
+    cargarvendedores()
     
     while True:
         selected = menu()
