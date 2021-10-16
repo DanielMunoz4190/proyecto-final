@@ -185,10 +185,15 @@ def registar_articulo():
     maximo=len(lista_productos[0])-1 
     if articulo >= 0 and articulo <= maximo:
         existencia  = int(existencia_Art(lista_productos, 5, articulo ))
-        cantidad = int(input("Cantidad de articulos a registrar: "))
-        cant_nueva = cantidad + existencia
-        lista_productos[5][articulo] = str(cant_nueva)
-        print("Inventario actualizado exitosamente")
+        while True:
+            cantidad = int(input("Cantidad de articulos a registrar: "))
+            if cantidad >= 1:
+                cant_nueva = cantidad + existencia
+                lista_productos[5][articulo] = str(cant_nueva)
+                print("Inventario actualizado exitosamente")
+                break
+            else:
+                print("Ingrese una cantidad minima de 1.")
     else:
         print("Este es un articulo nuevo, ingrese los datos correctamente para registrarlo.")
         lista_productos[0].append(articulo)
