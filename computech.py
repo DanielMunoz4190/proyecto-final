@@ -152,6 +152,8 @@ def registrar_venta():
             else:
                 llegada = existencia_Art(lista_productos, 6, producto)
                 print("No hay en existencia, llegan nuevos el: " + llegada)
+        elif cantidad <= 0:
+            print("Ingrese una cantidad mayor que cero.")        
         else:
             precio = int(existencia_Art(lista_productos, 4, producto))
             total = cantidad*precio
