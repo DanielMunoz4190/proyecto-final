@@ -159,22 +159,17 @@ def registrar_venta():
             total = cantidad*precio
             print("Su total es de: $",+total)
             lista_productos[5][producto]=str(existencia-cantidad)
-
-            while True:
-                vendedor = input("Nombre del vendedor que atendió: ")
-                vendedorIdx = buscar_elemento(lista_vendedores, vendedores.NOMBRE, vendedor)
-                if vendedorIdx != -1:
-                    vendedorIdx += 1
-                    lista_ventas[0].append(vendedorIdx)
-                    lista_ventas[1].append(producto)
-                    fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
-                    lista_ventas[2].append(fecha)
-                    lista_ventas[3].append(cantidad)
-                    lista_ventas[4].append(total)
-                    print("Venta registrada exitosamente")
-                    break
-                else:
-                    print(f"El vendedor {vendedor} no está registrado en el sistema.")
+        
+            if vendedorIdx != -1:
+                vendedorIdx += 1
+                lista_ventas[0].append(vendedorIdx)
+                lista_ventas[1].append(producto)
+                fecha = input("Ingrese la fecha de la venta en el formato M/D/A: ")
+                lista_ventas[2].append(fecha)
+                lista_ventas[3].append(cantidad)
+                lista_ventas[4].append(total)
+                print("Venta registrada exitosamente")            
+              
     else:
         print("Dicho articulo no se encuentra en el sistema")
   
